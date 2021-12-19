@@ -9,6 +9,11 @@ module.exports = {
       fontFamily: {
         'raleway-light': ['Raleway'],
       },
+      colors: {
+        mainblue: {
+          600: '#0061BB',
+        },
+      },
     },
   },
   plugins: [],
