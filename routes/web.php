@@ -35,3 +35,17 @@ Route::get(
         return view('profile');
     }
 );
+
+Route::get(
+    'tasks',
+    function () {
+        return view('tasks');
+    }
+);
+
+Route::get(
+    'task',
+    function () {
+        return view('task');
+    }
+);

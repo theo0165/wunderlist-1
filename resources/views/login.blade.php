@@ -15,15 +15,14 @@
         <div class="w-72 bg-white/25 rounded-xl flex flex-col justify-center items-center">
             <h2 class="font-raleway-light text-2xl mt-6">Log in</h2>
 
-
-            <form action="/test" method="post" class="w-full h-60 pl-6 pr-6 flex flex-col justify-center items-center">
+            <form action="/profile" method="post" class="w-full h-60 pl-6 pr-6 flex flex-col justify-center items-center">
                 <div class="flex flex-col mb-4">
                     <label for="email" class="text-sm">Email</label>
-                    <input type="email" name="email" id="email" class="rounded-md h-8">
+                    <input type="email" name="email" id="email" class="rounded-md w-52 h-8">
                 </div>
                 <div class="flex flex-col">
                     <label for="password" class="text-sm">Password</label>
-                    <input type="password" name="password" id="password" class="rounded-md h-8">
+                    <input type="password" name="password" id="password" class="rounded-md w-52 h-8">
                 </div>
                 <button type="submit" class="bg-mainblue-600 my-6 w-36 h-12 text-sm text-white rounded-md">Log in</button>
             </form>

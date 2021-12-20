@@ -22,7 +22,7 @@
 
     <div class="w-full flex flex-col items-center mt-12">
         <div class="w-24 h-24 bg-gray-400 rounded-full"></div>
-        <a href="{{url('signup')}}" class="bg-transparent mb-6 mt-6 w-36 h-12 text-sm text-mainblue-600 rounded-md border-2 border-mainblue-600 text-center leading-[2.75rem]">Tasks</a>
+        <a href="{{url('tasks')}}" class="bg-transparent mb-6 mt-6 w-36 h-12 text-sm text-mainblue-600 rounded-md border-2 border-mainblue-600 text-center leading-[2.75rem]">Tasks</a>
         <a href="{{url('signup')}}" class="bg-transparent mb-6 w-36 h-12 text-sm text-mainblue-600 rounded-md border-2 border-mainblue-600 text-center leading-[2.75rem]">Lists</a>
         <p class="mb-4">Due today</p>
     </div>
