@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RegisterUserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,19 +23,12 @@ Route::get(
     }
 );
 
-Route::get(
-    'signup',
-    function () {
-        return view('signup');
-    }
-);
 
-Route::get(
-    'profile',
-    function () {
-        return view('profile');
-    }
-);
+Route::get('/signup', [RegisterUserController::class, 'create']);
+Route::post('/', [RegisterUserController::class, 'store']);
+
+
+
 
 Route::get(
     'tasks',

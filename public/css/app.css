@@ -393,6 +393,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 }
+.my-auto {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
 .mb-6 {
   margin-bottom: 1.5rem;
 }
@@ -428,6 +436,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .mr-auto {
   margin-right: auto;
+}
+.mb-3 {
+  margin-bottom: 0.75rem;
 }
 .box-border {
   box-sizing: border-box;
@@ -501,6 +512,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-52 {
   width: 13rem;
 }
+.w-96 {
+  width: 24rem;
+}
 .max-w-sm {
   max-width: 24rem;
 }
@@ -510,11 +524,17 @@ Ensure the default browser behavior of the `hidden` attribute.
 .flex-col {
   flex-direction: column;
 }
+.items-start {
+  align-items: flex-start;
+}
 .items-end {
   align-items: flex-end;
 }
 .items-center {
   align-items: center;
+}
+.justify-start {
+  justify-content: flex-start;
 }
 .justify-end {
   justify-content: flex-end;
@@ -604,8 +624,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 .pr-6 {
   padding-right: 1.5rem;
 }
+.text-left {
+  text-align: left;
+}
 .text-center {
   text-align: center;
+}
+.text-right {
+  text-align: right;
 }
 .font-raleway-light {
   font-family: Raleway;
@@ -635,5 +661,13 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-mainblue-600 {
   --tw-text-opacity: 1;
   color: rgb(0 97 187 / var(--tw-text-opacity));
+}
+.text-red-800 {
+  --tw-text-opacity: 1;
+  color: rgb(153 27 27 / var(--tw-text-opacity));
+}
+.text-red-600 {
+  --tw-text-opacity: 1;
+  color: rgb(220 38 38 / var(--tw-text-opacity));
 }
 

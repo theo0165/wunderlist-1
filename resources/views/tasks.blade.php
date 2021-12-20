@@ -30,24 +30,24 @@
 
         <p class="ml-3">Tasks</p>
 
-        <div class="max-w-sm m-auto">
-
+        <!-- Task card -->
+        <button class="w-full max-w-sm m-auto">
             <div class="w-full h-28 bg-white/90 flex mt-1 rounded-md">
                 <div class="w-3 h-full bg-red-400 rounded-l-md"></div>
                 <div class="w-full h-full flex">
-                    <div class="w-4/6 h-full px-1 flex flex-col">
-                        <p class="font-semibold">Task Title</p>
-                        <p class="text-sm">Make an appointment somewhere.</p>
+                    <div class="w-4/6 h-full px-1 flex flex-col items-start">
+                        <p class="font-semibold text-left">Task Title</p>
+                        <p class="text-sm text-left">Make an appointment somewhere.</p>
                     </div>
                     <div class="w-2/6 h-full px-1 flex flex-col items-end">
-                        <p class="font-semibold">Due date</p>
-                        <p class="text-sm">10 Dec -21</p>
-                        <p class="text-sm">10.00 am</p>
+                        <p class="font-semibold text-right">Due date</p>
+                        <p class="text-sm text-right">10 Dec -21</p>
+                        <p class="text-sm text-right">10.00 am</p>
                     </div>
                 </div>
             </div>
+        </button>
 
-        </div>
     </main>
 
 
