@@ -22,6 +22,7 @@
             <h2 class="font-raleway-light text-2xl mt-6">Log in</h2>
 
             <form action="/profile" method="post" class="w-full h-60 pl-6 pr-6 flex flex-col justify-center items-center">
+                {{csrf_field()}}
                 <div class="flex flex-col mb-4">
                     <label for="email" class="text-sm">Email</label>
                     <input type="email" name="email" id="email" class="rounded-md w-52 h-8">
