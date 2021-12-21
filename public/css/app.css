@@ -436,6 +436,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .flex {
   display: flex;
 }
+.hidden {
+  display: none;
+}
 .h-screen {
   height: 100vh;
 }

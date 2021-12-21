@@ -19,13 +19,11 @@ class LogInUserController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            dd(auth()->user()->id);
-
             return redirect()->intended('profile');
         }
 
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'email' => 'Oops, something went wrong. Please try again.',
         ]);
     }
 }
