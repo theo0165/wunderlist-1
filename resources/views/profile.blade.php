@@ -8,9 +8,7 @@
 
 <body class="h-screen bg-gradient-to-t from-yellow-200 to-rose-200 box-border">
 
-
-
-
+    <p>{{auth()->user()->id}}</p>
 
     <nav class="w-full h-12 flex">
         <div class="w-1/3 h-full"></div>

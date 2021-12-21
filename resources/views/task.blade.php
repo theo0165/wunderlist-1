@@ -14,6 +14,7 @@
             <h2 class="font-raleway-light text-2xl mt-6">Task</h2>
 
             <form action="/task" method="post" id="taskform" class="w-full px-6 flex flex-col justify-center items-center">
+                {{csrf_field()}}
                 <div class="flex flex-col mb-4">
                     <label for="title" class="text-sm">Title</label>
                     <input type="text" name="title" id="title" class="rounded-md w-52 h-8">
@@ -23,13 +24,13 @@
                     <textarea name="description" id="description" cols="30" rows="4" form="taskform" class="rounded-md w-52 resize-none"></textarea>
                 </div>
                 <div class="flex flex-col mb-4">
-                    <label for="datetime" class="text-sm">Due date</label>
-                    <input type="datetime-local" name="datetime" id="datetime" class="rounded-md w-52 h-8">
+                    <label for="deadline" class="text-sm">Due date</label>
+                    <input type="datetime-local" name="deadline" id="deadline" class="rounded-md w-52 h-8">
                 </div>
                 <div class="flex flex-col mb-4">
-                    <label for="tasklistsselect" class="text-sm">Add to list</label>
-                    <select name="tasklists" id="tasklistsselect" class="rounded-md w-52 h-8 bg-white">
-                        <option value="none">---</option>
+                    <label for="listid" class="text-sm">Add to list</label>
+                    <select name="listid" id="listid" class="rounded-md w-52 h-8 bg-white">
+                        <option value="">---</option>
                     </select>
                 </div>
 
