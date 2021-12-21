@@ -12,7 +12,9 @@
 
         <img src="images/logo.svg" alt="" class="w-50">
 
-
+        @error('email')
+        <p>{{ $message }}</p>
+        @enderror
 
         @isset($success)
         <p class="mx-auto text-sm text-center">{{$success}}<br>Log in below to continue.</p>

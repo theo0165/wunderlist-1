@@ -3,41 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+
 
 class LogInUserController extends Controller
 {
     function __invoke(Request $request)
     {
-        //Validation rules
-        $rules = [
-            'email' => 'required', //|email?
-            'password' => 'required',
-        ];
-        $customMessages = [
-            'required' => 'The :attribute field is required'
-        ];
-        //Validate, throws errors and returns if fails.
-        $validation = $this->validate($request, $rules, $customMessages);
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
 
-        $email = $validation['email'];
-        $password = $validation['password'];
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
 
-        //Check if there is a user in the db with that email.
-        $user = User::where('email', $email)->first();
-        if ($user === null) {
-            //No user, do something
-            return '404';
+            dd(auth()->user()->id);
+
+            return redirect()->intended('profile');
         }
 
-        $passwordIsCorrect = Hash::check($password, $user->password);
-
-        if ($passwordIsCorrect) {
-            return view('profile');
-        }
-        //Update this later
-        return 'Wrong password';
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ]);
     }
 }
