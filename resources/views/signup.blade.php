@@ -25,6 +25,9 @@
                     @if ($errors->first('email'))
                     <p class="text-sm text-red-600">{{$errors->first('email')}}</p>
                     @endif
+                    @if (isset($userexisterror))
+                    <p class="text-sm text-red-600">{{$userexisterror}}</p>
+                    @endif
                 </div>
                 <div class="flex flex-col">
                     <label for="password" class="text-sm">Password</label>

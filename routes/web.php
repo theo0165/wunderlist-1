@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LogInUserController;
 use App\Http\Controllers\RegisterUserController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,9 +25,14 @@ Route::get(
 );
 
 
+
 Route::get('/signup', [RegisterUserController::class, 'create']);
 Route::post('/', [RegisterUserController::class, 'store']);
 
+Route::get('/profile', function () {
+    return view('profile');
+});
+Route::post('/profile', LogInUserController::class);
 
 
 
