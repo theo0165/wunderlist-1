@@ -37,13 +37,7 @@ Route::post('/profile', LogInUserController::class);
 
 
 
-Route::get(
-    'tasks',
-    function () {
-        return view('tasks');
-    }
-);
-Route::post('/tasks', [TaskController::class, 'edit']);
+Route::get('/tasks', [TaskController::class, 'load']);
+Route::post('/tasks', [TaskController::class, 'store']);
 
-Route::get('/task', [TaskController::class, 'create']);
-Route::post('/task', [TaskController::class, 'store']);
+Route::get('/createtask', [TaskController::class, 'create']);

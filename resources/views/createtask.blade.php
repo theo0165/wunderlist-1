@@ -13,7 +13,7 @@
         <div class="w-72 bg-white/25 rounded-xl flex flex-col justify-center items-center">
             <h2 class="font-raleway-light text-2xl mt-6">Task</h2>
 
-            <form action="/task" method="post" id="taskform" class="w-full px-6 flex flex-col justify-center items-center">
+            <form action="/tasks" method="post" id="taskform" class="w-full px-6 flex flex-col justify-center items-center">
                 {{csrf_field()}}
                 <div class="flex flex-col mb-4">
                     <label for="title" class="text-sm">Title</label>
@@ -34,10 +34,6 @@
                     </select>
                 </div>
 
-                <div class="flex flex-col w-52 mb-4">
-                    <label for="completed" class="text-sm">Completed</label>
-                    <input type="checkbox" name="completed" id="completed" class="mr-auto">
-                </div>
                 <button type="submit" class="bg-mainblue-600 my-6 w-36 h-12 text-sm text-white rounded-md">Done</button>
             </form>
 

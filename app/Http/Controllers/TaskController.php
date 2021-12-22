@@ -14,7 +14,7 @@ class TaskController extends Controller
 
     public function create()
     {
-        return view('task');
+        return view('createtask');
     }
 
     public function store(Request $request)
@@ -31,5 +31,12 @@ class TaskController extends Controller
             $task->completed = false;
         }
         $task->save();
+        return view("tasks");
+    }
+
+    public function load()
+    {
+        $tasks = Task::where('user_id', auth()->id())->get()->toArray();
+        return view("tasks", ['tasks' => $tasks]);
     }
 }
