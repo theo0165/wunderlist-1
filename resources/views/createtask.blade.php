@@ -6,7 +6,7 @@
     <title>Listig | Task</title>
 </head>
 
-<body class="h-screen bg-gradient-to-t from-yellow-200 to-rose-200 box-border">
+<body class="h-screen m-0 bg-gradient-to-t from-yellow-200 to-rose-200 bg-no-repeat bg-fixed box-border">
 
     <main class="w-full h-full flex flex-col justify-center items-center">
 

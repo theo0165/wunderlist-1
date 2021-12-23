@@ -30,15 +30,11 @@ Route::get(
 Route::get('/signup', [RegisterUserController::class, 'create']);
 Route::post('/', [RegisterUserController::class, 'store']);
 
-Route::get('/profile', function () {
-    return view('profile');
-});
+Route::get('/profile', [TaskController::class, 'loadToday']);
 Route::post('/profile', LogInUserController::class);
 
-
-
 Route::get('/tasks', [TaskController::class, 'load']);
-Route::post('/tasks', [TaskController::class, 'store']);
+Route::post('/tasks', [TaskController::class, 'request']);
 
 Route::get('/createtask', [TaskController::class, 'create']);
 Route::post('/edittask', [TaskController::class, 'edit']);
