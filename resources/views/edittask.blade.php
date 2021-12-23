@@ -10,7 +10,15 @@
 
     <main class="w-full h-full flex flex-col justify-center items-center">
 
-        <div class="w-72 bg-white/25 rounded-xl flex flex-col justify-center items-center">
+        <div class="w-72 bg-white/25 rounded-xl flex flex-col justify-center items-center relative">
+
+            <form action="/tasks" method="post" id="deletetaskform" class="absolute top-2 right-2">
+                {{csrf_field()}}
+                <button type="submit"><img src="images/trash-icon.svg" alt="" class=" w-8 h-8"></button>
+                <input type="hidden" name="id" value="{{$task['id']}}">
+                <input type="hidden" name="request" value="delete">
+            </form>
+
             <h2 class="font-raleway-light text-2xl mt-6">Task</h2>
 
             <form action="/tasks" method="post" id="taskform" class="w-full px-6 flex flex-col justify-center items-center">
@@ -42,10 +50,10 @@
                     <input type="checkbox" name="completed" id="completed" checked class="mr-auto">
                     @endif
 
-
                 </div>
 
                 <input type="hidden" name="id" value="{{$task['id']}}">
+                <input type="hidden" name="request" value="update">
 
 
                 <button type="submit" class="bg-mainblue-600 my-6 w-36 h-12 text-sm text-white rounded-md">Done</button>
