@@ -17,15 +17,15 @@
                 {{csrf_field()}}
                 <div class="flex flex-col mb-4">
                     <label for="title" class="text-sm">Title</label>
-                    <input type="text" name="title" id="title" class="rounded-md w-52 h-8">
+                    <input type="text" name="title" id="title" value="{{$task['title']}}" class="rounded-md w-52 h-8">
                 </div>
                 <div class="flex flex-col mb-4">
                     <label for="description" class="text-sm">Description</label>
-                    <textarea name="description" id="description" cols="30" rows="4" form="taskform" class="rounded-md w-52 resize-none"></textarea>
+                    <textarea name="description" id="description" cols="30" rows="4" form="taskform" class="rounded-md w-52 resize-none">{{$task['description']}}</textarea>
                 </div>
                 <div class="flex flex-col mb-4">
                     <label for="deadline" class="text-sm">Due date</label>
-                    <input type="datetime-local" name="deadline" id="deadline" class="rounded-md w-52 h-8">
+                    <input type="datetime-local" name="deadline" id="deadline" value="{{$task['deadline']}}" class="rounded-md w-52 h-8">
                 </div>
                 <div class="flex flex-col mb-4">
                     <label for="listid" class="text-sm">Add to list</label>
@@ -36,7 +36,13 @@
 
                 <div class="flex flex-col w-52 mb-4">
                     <label for="completed" class="text-sm">Completed</label>
+                    @if($task['completed'] === 0)
                     <input type="checkbox" name="completed" id="completed" class="mr-auto">
+                    @else
+                    <input type="checkbox" name="completed" id="completed" checked class="mr-auto">
+                    @endif
+
+
                 </div>
                 <button type="submit" class="bg-mainblue-600 my-6 w-36 h-12 text-sm text-white rounded-md">Done</button>
             </form>
