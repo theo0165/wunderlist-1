@@ -19,18 +19,42 @@ class TaskController extends Controller
 
     public function store(Request $request)
     {
-        $task = new Task;
-        $task->user_id = auth()->id();
-        $task->title = $request->input('title');
-        $task->description = $request->input('description');
-        $task->deadline = $request->input('deadline');
-        $task->list_id = $request->input('listid');
-        if ($request->has('completed')) {
-            $task->completed = true;
-        } else {
-            $task->completed = false;
+
+        if (!$request->has('id')) { //Store
+            $task = new Task;
+            $task->user_id = auth()->id();
+            $task->title = $request->input('title');
+            $task->description = $request->input('description');
+            $task->deadline = $request->input('deadline');
+            $task->list_id = $request->input('listid');
+            if ($request->has('completed')) {
+                $task->completed = true;
+            } else {
+                $task->completed = false;
+            }
+            $task->save();
+        } else { //Update
+            Task::where('id', $request->input('id'))
+                ->update([
+                    'title' => $request->input('title'),
+                    'description' => $request->input('description'),
+                    'deadline' => $request->input('deadline'),
+                    'list_id' => $request->input('list_id')
+                ]);
+
+            if ($request->has('completed')) { //Must be a better way, come back to.
+                Task::where('id', $request->input('id'))
+                    ->update([
+                        'completed' => 1
+                    ]);
+            } else {
+                Task::where('id', $request->input('id'))
+                    ->update([
+                        'completed' => 0
+                    ]);
+            }
         }
-        $task->save();
+
         $tasks = Task::where('user_id', auth()->id())->get()->toArray();
         return view("tasks", ['tasks' => $tasks]);
     }
