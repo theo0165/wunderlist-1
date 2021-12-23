@@ -28,19 +28,15 @@
             <p class="text-sm">New task</p>
         </div>
 
-        <p class="ml-3">Tasks</p>
+        <p class="ml-3 mb-2">Tasks</p>
 
-
-
-
-
-        <form action="/edittask" method="post">
+        @foreach($tasks as $task)
+        <!-- Task card -->
+        <form action="/edittask" method="post" class="mb-0.5">
             {{csrf_field()}}
-            @foreach($tasks as $task)
-            <!-- Task card -->
-            <button class="w-full max-w-sm m-auto">
-                <input type="hidden" name="button" value="1">
-                <div class="w-full h-28 bg-white/90 flex mt-1 rounded-md">
+            <button class="w-full max-w-sm m-auto block">
+                <input type="hidden" name="task_id" value="{{$task['id']}}">
+                <div class="w-full h-28 bg-white/90 flex rounded-md">
                     @if(!$task['completed'])
                     <div class="w-3 h-full bg-red-400 rounded-l-md"></div>
                     @else
@@ -58,8 +54,8 @@
                     </div>
                 </div>
             </button>
-            @endforeach
         </form>
+        @endforeach
 
     </main>
 

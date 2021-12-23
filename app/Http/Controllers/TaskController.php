@@ -31,12 +31,20 @@ class TaskController extends Controller
             $task->completed = false;
         }
         $task->save();
-        return view("tasks");
+        $tasks = Task::where('user_id', auth()->id())->get()->toArray();
+        return view("tasks", ['tasks' => $tasks]);
     }
 
     public function load()
     {
         $tasks = Task::where('user_id', auth()->id())->get()->toArray();
         return view("tasks", ['tasks' => $tasks]);
+    }
+
+    public function edit(Request $request)
+    {
+        $taskid = $request->input('task_id');
+        $task = Task::where('user_id', auth()->id())->where('id', $taskid)->get()->toArray();
+        return view("edittask", ['task' => $task[0]]);
     }
 }
