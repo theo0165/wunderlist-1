@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Hash;
 
 use function GuzzleHttp\Promise\all;
 
+use DateTime;
+
 class TaskController extends Controller
 {
 
@@ -56,12 +58,36 @@ class TaskController extends Controller
         }
 
         $tasks = Task::where('user_id', auth()->id())->get()->toArray();
+        //Sort tasks by dateTime
+        //https://stackoverflow.com/questions/8121241/sort-array-based-on-the-datetime-in-php
+        usort($tasks, function ($a, $b) { //Couldn't make a function from this, repeating below, come back to.
+            $ad = new DateTime($a['deadline']);
+            $bd = new DateTime($b['deadline']);
+
+            if ($ad == $bd) {
+                return 0;
+            }
+
+            return $ad < $bd ? -1 : 1;
+        });
         return view("tasks", ['tasks' => $tasks]);
     }
+
+
 
     public function load()
     {
         $tasks = Task::where('user_id', auth()->id())->get()->toArray();
+        usort($tasks, function ($a, $b) {
+            $ad = new DateTime($a['deadline']);
+            $bd = new DateTime($b['deadline']);
+
+            if ($ad == $bd) {
+                return 0;
+            }
+
+            return $ad < $bd ? -1 : 1;
+        });
         return view("tasks", ['tasks' => $tasks]);
     }
 
