@@ -41,5 +41,4 @@ Route::get('/tasks', [TaskController::class, 'load']);
 Route::post('/tasks', [TaskController::class, 'store']);
 
 Route::get('/createtask', [TaskController::class, 'create']);
-
 Route::post('/edittask', [TaskController::class, 'edit']);
