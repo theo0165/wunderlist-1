@@ -22,7 +22,7 @@ class TaskController extends Controller
     public function store(Request $request)
     {
 
-        if (!$request->has('id')) { //Store
+        if ($request->input('request') === 'store') { //Store
             $task = new Task;
             $task->user_id = auth()->id();
             $task->title = $request->input('title');
@@ -35,8 +35,8 @@ class TaskController extends Controller
                 $task->completed = false;
             }
             $task->save();
-        } else { //Update
-            Task::where('id', $request->input('id'))
+        } else if ($request->input('request') === 'update') { //Update
+            Task::where('id', $request->input('id')) //Is this safe, could you change the id in the browser and change other's tasks?
                 ->update([
                     'title' => $request->input('title'),
                     'description' => $request->input('description'),
@@ -55,6 +55,8 @@ class TaskController extends Controller
                         'completed' => 0
                     ]);
             }
+        } else { //Delete
+            Task::where('id', $request->input('id'))->delete();
         }
 
         $tasks = Task::where('user_id', auth()->id())->get()->toArray();
@@ -71,6 +73,10 @@ class TaskController extends Controller
             return $ad < $bd ? -1 : 1;
         });
         return view("tasks", ['tasks' => $tasks]);
+    }
+
+    public function delete()
+    {
     }
 
 
