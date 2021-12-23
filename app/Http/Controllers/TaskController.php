@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use function GuzzleHttp\Promise\all;
 
 use DateTime;
+use DateTimeZone;
 
 class TaskController extends Controller
 {
@@ -19,7 +20,7 @@ class TaskController extends Controller
         return view('createtask');
     }
 
-    public function store(Request $request)
+    public function request(Request $request)
     {
 
         if ($request->input('request') === 'store') { //Store
@@ -75,10 +76,6 @@ class TaskController extends Controller
         return view("tasks", ['tasks' => $tasks]);
     }
 
-    public function delete()
-    {
-    }
-
 
 
     public function load()
@@ -95,6 +92,39 @@ class TaskController extends Controller
             return $ad < $bd ? -1 : 1;
         });
         return view("tasks", ['tasks' => $tasks]);
+    }
+
+    public function loadToday()
+    {
+
+
+        $tasks = Task::where('user_id', auth()->id())->get()->toArray();
+
+        $tasks = array_filter($tasks, function ($task) {
+
+            $today = new DateTime('today'); //Timezone?
+            $today = $today->getTimestamp();
+            $deadline = strtotime($task['deadline']);
+            $timeDelta = $deadline - $today;
+            if ($timeDelta < 86400 && $timeDelta >= 0) {
+                return true;
+            }
+            return false;
+        });
+
+
+
+        usort($tasks, function ($a, $b) {
+            $ad = new DateTime($a['deadline']);
+            $bd = new DateTime($b['deadline']);
+
+            if ($ad == $bd) {
+                return 0;
+            }
+
+            return $ad < $bd ? -1 : 1;
+        });
+        return view("profile", ['tasks' => $tasks]);
     }
 
     public function edit(Request $request)
