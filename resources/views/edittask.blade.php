@@ -12,7 +12,7 @@
 
         <div class="w-72 bg-white/25 rounded-xl flex flex-col justify-center items-center relative">
 
-            <form action="/tasks" method="post" id="deletetaskform" class="absolute top-2 right-2">
+            <form action="{{url()->previous()}}" method="post" id="deletetaskform" class="absolute top-2 right-2">
                 {{csrf_field()}}
                 <button type="submit"><img src="images/trash-icon.svg" alt="" class=" w-8 h-8"></button>
                 <input type="hidden" name="id" value="{{$task['id']}}">
@@ -21,7 +21,7 @@
 
             <h2 class="font-raleway-light text-2xl mt-6">Task</h2>
 
-            <form action="/tasks" method="post" id="taskform" class="w-full px-6 flex flex-col justify-center items-center">
+            <form action="{{url()->previous()}}" method="post" id="taskform" class="w-full px-6 flex flex-col justify-center items-center">
                 {{csrf_field()}}
                 <div class="flex flex-col mb-4">
                     <label for="title" class="text-sm">Title</label>

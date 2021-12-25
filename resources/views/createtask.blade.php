@@ -13,7 +13,7 @@
         <div class="w-72 bg-white/25 rounded-xl flex flex-col justify-center items-center">
             <h2 class="font-raleway-light text-2xl mt-6">Task</h2>
 
-            <form action="/tasks" method="post" id="taskform" class="w-full px-6 flex flex-col justify-center items-center">
+            <form action="{{url()->previous()}}" method="post" id="taskform" class="w-full px-6 flex flex-col justify-center items-center">
                 {{csrf_field()}}
                 <div class="flex flex-col mb-4">
                     <label for="title" class="text-sm">Title</label>

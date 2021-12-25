@@ -20,9 +20,11 @@ class TaskController extends Controller
         return view('createtask');
     }
 
+    //This method checks a request concerning task editing and make different things depending on what the key 'request' has for a value.
+    //This method gets called either on when a task should be created, updated or deleted.
+    //It's called on either the tasks or list page (the form will send to the previous page and are loading the corresponding views based on the current url.
     public function request(Request $request)
     {
-
         if ($request->input('request') === 'store') { //Store
             $task = new Task;
             $task->user_id = auth()->id();
@@ -62,18 +64,8 @@ class TaskController extends Controller
 
         $tasks = Task::where('user_id', auth()->id())->get()->toArray();
         //Sort tasks by dateTime
-        //https://stackoverflow.com/questions/8121241/sort-array-based-on-the-datetime-in-php
-        usort($tasks, function ($a, $b) { //Couldn't make a function from this, repeating below, come back to.
-            $ad = new DateTime($a['deadline']);
-            $bd = new DateTime($b['deadline']);
-
-            if ($ad == $bd) {
-                return 0;
-            }
-
-            return $ad < $bd ? -1 : 1;
-        });
-        return view("tasks", ['tasks' => $tasks]);
+        $tasks = sortTaskeByDateTime($tasks);
+        return view(request()->path(), ['tasks' => $tasks]);
     }
 
 
@@ -81,16 +73,9 @@ class TaskController extends Controller
     public function load()
     {
         $tasks = Task::where('user_id', auth()->id())->get()->toArray();
-        usort($tasks, function ($a, $b) {
-            $ad = new DateTime($a['deadline']);
-            $bd = new DateTime($b['deadline']);
 
-            if ($ad == $bd) {
-                return 0;
-            }
+        $tasks = sortTaskeByDateTime($tasks);
 
-            return $ad < $bd ? -1 : 1;
-        });
         return view("tasks", ['tasks' => $tasks]);
     }
 
@@ -112,18 +97,8 @@ class TaskController extends Controller
             return false;
         });
 
+        $tasks = sortTaskeByDateTime($tasks);
 
-
-        usort($tasks, function ($a, $b) {
-            $ad = new DateTime($a['deadline']);
-            $bd = new DateTime($b['deadline']);
-
-            if ($ad == $bd) {
-                return 0;
-            }
-
-            return $ad < $bd ? -1 : 1;
-        });
         return view("profile", ['tasks' => $tasks]);
     }
 
@@ -133,4 +108,20 @@ class TaskController extends Controller
         $task = Task::where('user_id', auth()->id())->where('id', $taskid)->get()->toArray();
         return view("edittask", ['task' => $task[0]]);
     }
+}
+
+function sortTaskeByDateTime($tasks)
+{
+    //https://stackoverflow.com/questions/8121241/sort-array-based-on-the-datetime-in-php
+    usort($tasks, function ($a, $b) {
+        $ad = new DateTime($a['deadline']);
+        $bd = new DateTime($b['deadline']);
+
+        if ($ad == $bd) {
+            return 0;
+        }
+
+        return $ad < $bd ? -1 : 1;
+    });
+    return $tasks;
 }
