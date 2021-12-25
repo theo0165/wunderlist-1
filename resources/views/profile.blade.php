@@ -28,11 +28,15 @@
             <a href="{{url('signup')}}" class="bg-transparent mb-6 w-36 h-12 text-sm text-mainblue-600 rounded-md border-2 border-mainblue-600 text-center leading-[2.75rem]">Lists</a>
             <p class="mb-4">Due today</p>
         </div>
+        @if(empty($tasks))
+        <p class="text-gray-600 text-center text-sm">There are no tasks due today.</p>
+        @else
 
         @foreach($tasks as $task)
         @include('includes.taskcard')
         @endforeach
 
+        @endif
     </main>
 
 </body>
