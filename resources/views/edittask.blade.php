@@ -12,16 +12,17 @@
 
         <div class="w-72 bg-white/25 rounded-xl flex flex-col justify-center items-center relative">
 
-            <form action="{{url()->previous()}}" method="post" id="deletetaskform" class="absolute top-2 right-2">
+            <form method="post" id="deletetaskform" class="absolute top-2 right-2">
                 {{csrf_field()}}
                 <button type="submit"><img src="images/trash-icon.svg" alt="" class=" w-8 h-8"></button>
                 <input type="hidden" name="id" value="{{$task['id']}}">
                 <input type="hidden" name="request" value="delete">
+                <input type="hidden" name="back_url" value="{{$task['back_url']}}">
             </form>
 
             <h2 class="font-raleway-light text-2xl mt-6">Task</h2>
 
-            <form action="{{url()->previous()}}" method="post" id="taskform" class="w-full px-6 flex flex-col justify-center items-center">
+            <form action="" method="post" id="taskform" class="w-full px-6 flex flex-col justify-center items-center">
                 {{csrf_field()}}
                 <div class="flex flex-col mb-4">
                     <label for="title" class="text-sm">Title</label>
@@ -54,6 +55,7 @@
 
                 <input type="hidden" name="id" value="{{$task['id']}}">
                 <input type="hidden" name="request" value="update">
+                <input type="hidden" name="back_url" value="{{$task['back_url']}}">
 
 
                 <button type="submit" class="bg-mainblue-600 my-6 w-36 h-12 text-sm text-white rounded-md">Done</button>

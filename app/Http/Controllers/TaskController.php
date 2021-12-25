@@ -14,11 +14,16 @@ use DateTimeZone;
 
 class TaskController extends Controller
 {
-    //This method checks a request concerning task editing and make different things depending on what the key 'request' has for a value.
-    //This method gets called either on when a task should be created, updated or deleted.
-    //It's called on either the tasks or list page (the form will send to the previous page) and are loading the corresponding views based on the current url.
     public function request(Request $request)
     {
+
+        if ($request->has('task_id')) { //Load the form with task_id
+            $taskid = $request->input('task_id');
+            $task = Task::where('user_id', auth()->id())->where('id', $taskid)->get()->toArray();
+            $task[0]['back_url'] = $request['back_url'];
+            return view("edittask", ['task' => $task[0]]);
+        }
+
         if ($request->input('request') === 'store') { //Store
             $task = new Task;
             $task->user_id = auth()->id();
@@ -32,6 +37,7 @@ class TaskController extends Controller
                 $task->completed = false;
             }
             $task->save();
+            return redirect()->route("tasks");
         } else if ($request->input('request') === 'update') { //Update
 
             $isCompleted = false;
@@ -51,10 +57,7 @@ class TaskController extends Controller
             Task::where('id', $request->input('id'))->delete();
         }
 
-        $tasks = Task::where('user_id', auth()->id())->get()->toArray();
-        //Sort tasks by dateTime
-        $tasks = sortTaskeByDateTime($tasks);
-        return view(request()->path(), ['tasks' => $tasks]);
+        return redirect()->to($request->input('back_url'));
     }
 
     public function load()
@@ -80,14 +83,7 @@ class TaskController extends Controller
         });
 
         $tasks = sortTaskeByDateTime($tasks);
-        return view("profile", ['tasks' => $tasks]);
-    }
-
-    public function edit(Request $request)
-    {
-        $taskid = $request->input('task_id');
-        $task = Task::where('user_id', auth()->id())->where('id', $taskid)->get()->toArray();
-        return view("edittask", ['task' => $task[0]]);
+        return view(request()->path(), ['tasks' => $tasks]);
     }
 }
 
