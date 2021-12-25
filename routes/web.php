@@ -36,5 +36,5 @@ Route::post('/profile', LogInUserController::class);
 Route::get('/tasks', [TaskController::class, 'load']);
 Route::post('/tasks', [TaskController::class, 'request']);
 
-Route::get('/createtask', [TaskController::class, 'create']);
+Route::view('/createtask', 'createtask');
 Route::post('/edittask', [TaskController::class, 'edit']);
