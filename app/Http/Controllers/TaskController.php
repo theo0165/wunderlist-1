@@ -14,15 +14,9 @@ use DateTimeZone;
 
 class TaskController extends Controller
 {
-
-    public function create()
-    {
-        return view('createtask');
-    }
-
     //This method checks a request concerning task editing and make different things depending on what the key 'request' has for a value.
     //This method gets called either on when a task should be created, updated or deleted.
-    //It's called on either the tasks or list page (the form will send to the previous page and are loading the corresponding views based on the current url.
+    //It's called on either the tasks or list page (the form will send to the previous page) and are loading the corresponding views based on the current url.
     public function request(Request $request)
     {
         if ($request->input('request') === 'store') { //Store
@@ -39,25 +33,20 @@ class TaskController extends Controller
             }
             $task->save();
         } else if ($request->input('request') === 'update') { //Update
+
+            $isCompleted = false;
+            if ($request->has('completed')) {
+                $isCompleted = true;
+            }
+
             Task::where('id', $request->input('id')) //Is this safe, could you change the id in the browser and change other's tasks?
                 ->update([
                     'title' => $request->input('title'),
                     'description' => $request->input('description'),
                     'deadline' => $request->input('deadline'),
-                    'list_id' => $request->input('list_id')
+                    'list_id' => $request->input('list_id'),
+                    'completed' => $isCompleted
                 ]);
-
-            if ($request->has('completed')) { //Must be a better way, come back to.
-                Task::where('id', $request->input('id'))
-                    ->update([
-                        'completed' => 1
-                    ]);
-            } else {
-                Task::where('id', $request->input('id'))
-                    ->update([
-                        'completed' => 0
-                    ]);
-            }
         } else { //Delete
             Task::where('id', $request->input('id'))->delete();
         }
@@ -68,25 +57,18 @@ class TaskController extends Controller
         return view(request()->path(), ['tasks' => $tasks]);
     }
 
-
-
     public function load()
     {
         $tasks = Task::where('user_id', auth()->id())->get()->toArray();
-
         $tasks = sortTaskeByDateTime($tasks);
-
         return view("tasks", ['tasks' => $tasks]);
     }
 
     public function loadToday()
     {
-
-
         $tasks = Task::where('user_id', auth()->id())->get()->toArray();
 
         $tasks = array_filter($tasks, function ($task) {
-
             $today = new DateTime('today'); //Timezone?
             $today = $today->getTimestamp();
             $deadline = strtotime($task['deadline']);
@@ -98,7 +80,6 @@ class TaskController extends Controller
         });
 
         $tasks = sortTaskeByDateTime($tasks);
-
         return view("profile", ['tasks' => $tasks]);
     }
 

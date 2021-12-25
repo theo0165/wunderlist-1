@@ -59,7 +59,7 @@
                 <button type="submit" class="bg-mainblue-600 my-6 w-36 h-12 text-sm text-white rounded-md">Done</button>
             </form>
 
-            <a href="{{url('tasks')}}" class="mb-6 text-sm text-mainblue-600">Cancel</a>
+            <a href="{{url()->previous()}}" class="mb-6 text-sm text-mainblue-600">Cancel</a>
         </div>
     </main>
 
