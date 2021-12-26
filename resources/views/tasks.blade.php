@@ -42,7 +42,7 @@
 
     </main>
 
-
+    <script src="js/animatecards.js"></script>
 
 </body>
 
