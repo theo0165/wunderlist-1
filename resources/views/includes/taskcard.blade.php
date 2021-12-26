@@ -1,11 +1,11 @@
 <!-- Task card -->
-<form action="/edittask" method="post" class="mb-0.5">
+<form action="/edittask" method="post" class="mb-0.5 opacity-0 rounded-md hover:bg-white/20">
     {{csrf_field()}}
     <button class="w-full max-w-sm m-auto block">
         <input type="hidden" name="task_id" value="{{$task['id']}}">
         <input type="hidden" name="back_url" value="{{url()->current()}}">
         @if(!$task['completed'])
-        <div class="w-full h-28 bg-white/50 flex rounded-md">
+        <div class="w-full h-28 bg-white/50 flex ">
             <div class="w-3 h-full bg-red-400 rounded-l-md"></div>
             @else
             <div class="w-full h-28 bg-white/50 flex rounded-md text-black text-opacity-50">
