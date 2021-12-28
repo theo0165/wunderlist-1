@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Task;
+use App\Models\TaskList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -16,9 +17,15 @@ class TaskController extends Controller
         //This is when entering 'edittask'-page.
         if ($request->has('task_id')) {
             $taskid = $request->input('task_id');
-            $task = Task::where('user_id', auth()->id())->where('id', $taskid)->get()->toArray();
-            $task[0]['back_url'] = $request['back_url'];
-            return view("edittask", ['task' => $task[0]]);
+            $task = Task::where('user_id', auth()->id())->where('id', $taskid)->first()->toArray();
+            $task['back_url'] = $request['back_url'];
+
+            //Make a join with list table and find which list that belongs to to this task.
+            //Add the name of it to task, just for display in the form. The list_id is already saved.
+
+            $lists = TaskList::all()->toArray();
+
+            return view("edittask", ['task' => $task, 'lists' => $lists]);
         }
 
         if ($request->input('request') === 'createfromlist') {
@@ -50,7 +57,7 @@ class TaskController extends Controller
                         'title' => $request->input('title'),
                         'description' => $request->input('description'),
                         'deadline' => $request->input('deadline'),
-                        'list_id' => $request->input('list_id'),
+                        'list_id' => $request->input('listid'),
                         'completed' => $isCompleted
                     ]);
                 return redirect()->to($request->input('back_url'));
@@ -71,7 +78,7 @@ class TaskController extends Controller
     {
         $tasks = DB::table('tasks')
             ->where('tasks.user_id', auth()->id())
-            ->join('lists', 'tasks.list_id', '=', 'lists.id')
+            ->join('task_lists', 'tasks.list_id', '=', 'task_lists.id')
             ->get()->toArray();
         $tasks = sortTaskeByDateTime($tasks);
         return view("list", ['tasks' => $tasks]);

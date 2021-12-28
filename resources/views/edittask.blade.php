@@ -39,9 +39,13 @@
                 <div class="flex flex-col mb-4">
                     <label for="listid" class="text-sm">Add to list</label>
                     <select name="listid" id="listid" class="rounded-md w-52 h-8  bg-white/80">
-                        <option value="">---</option>
+                        <option value=""></option>
+                        @foreach($lists as $list)
+                        <option value="{{$list['id']}}">{{$list['title']}}</option>
+                        @endforeach
                     </select>
                 </div>
+
 
                 <div class="flex flex-col w-52 mb-4">
                     <label for="completed" class="text-sm">Completed</label>
@@ -61,7 +65,7 @@
                 <button type="submit" class="bg-mainblue-600 my-6 w-36 h-12 text-sm text-white rounded-md">Done</button>
             </form>
 
-            <a href="{{url()->previous()}}" class="mb-6 text-sm text-mainblue-600">Cancel</a>
+            <a href="{{$task['back_url']}}" class="mb-6 text-sm text-mainblue-600">Cancel</a>
         </div>
     </main>
 
