@@ -8,9 +8,6 @@ use Illuminate\Http\Request;
 
 class TaskListController extends Controller
 {
-    public function request(Request $request)
-    {
-    }
 
     public function loadLists()
     {
@@ -20,7 +17,10 @@ class TaskListController extends Controller
 
     public function createList(Request $request)
     {
-        dd($request->all());
+        $list = new TaskList();
+        $list->user_id = auth()->id();
+        $list->title = $request->input('title');
+        $list->save();
         return redirect()->route("lists");
     }
 }

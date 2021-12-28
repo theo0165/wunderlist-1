@@ -41,7 +41,7 @@
         </button>
 
 
-        @if(empty($tasks))
+        @if(empty($lists))
         <p class="text-gray-600 text-center text-sm mt-20">There are no lists.<br>Click above to add a new one.</p>
         @else
         <p class="ml-3 mb-2 ">Tasks</p>

@@ -36,12 +36,13 @@ Route::get('/profile', [TaskController::class, 'loadToday']);
 Route::post('/profile', LogInUserController::class);
 
 Route::get('/tasks', [TaskController::class, 'loadTasksInTasks'])->name('tasks');
+
 Route::post('/edittask', [TaskController::class, 'request']);
 
 Route::view('/createtask', 'createtask');
 Route::post('/createtask', [TaskController::class, 'request']);
 
-Route::get('/list', [TaskController::class, 'loadTasksInList'])->name('list');
+Route::post('/list', [TaskController::class, 'loadTasksInList'])->name('list');
 
 Route::get('/lists', [TaskListController::class, 'loadLists'])->name('lists');
 Route::post('/lists', [TaskListController::class, 'createList']);

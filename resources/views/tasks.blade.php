@@ -22,12 +22,14 @@
             </div>
         </nav>
 
-        <div class="w-full flex flex-col items-center mt-12 mb-8">
-            <p>All tasks</p>
-            <a href="createtask" class="w-12 h-12 m-4 mb-1"><img src="images/add-icon.svg" alt=""></a>
-            <p class="text-sm">New task</p>
-        </div>
-
+        <form action="/createtask" method="get">
+            <input type="hidden" name="list" value="">
+            <button type="submit" class="w-full flex flex-col items-center mt-12 mb-8">
+                <p>All tasks</p>
+                <img src="images/add-icon.svg" alt="" class="w-12 h-12 m-4 mb-1">
+                <p class="text-sm">New task</p>
+            </button>
+        </form>
 
         @if(empty($tasks))
         <p class="text-gray-600 text-center text-sm mt-20">There are no tasks.<br>Click above to add a new one.</p>
