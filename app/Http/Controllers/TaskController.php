@@ -5,14 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Task;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 
-use function GuzzleHttp\Promise\all;
-use function PHPUnit\Framework\returnSelf;
-
 use DateTime;
-use DateTimeZone;
 
 class TaskController extends Controller
 {

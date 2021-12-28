@@ -14,14 +14,14 @@
     <main class="w-full h-full flex flex-col justify-center items-center">
         <img src="images/logo.svg" alt="" class=" w-50">
 
-        <div class="w-72 bg-white/25 mt-3 rounded-xl flex flex-col justify-center items-center">
+        <div class="w-72 bg-white/25 mt-3 rounded-xl flex flex-col justify-center items-center shadow-lg">
             <h2 class="font-raleway-light text-2xl mt-6">Sign up</h2>
 
             <form action="/" method="post" class="w-full h-60 pl-6 pr-6 flex flex-col justify-center items-center">
                 {{csrf_field()}}
                 <div class="flex flex-col mb-4">
                     <label for="email" class="text-sm">Email</label>
-                    <input type="email" name="email" id="email" class="rounded-md w-52 h-8">
+                    <input type="email" name="email" id="email" class="rounded-md w-52 h-8 bg-white/80">
                     @if ($errors->first('email'))
                     <p class="text-sm text-red-600">{{$errors->first('email')}}</p>
                     @endif
@@ -31,7 +31,7 @@
                 </div>
                 <div class="flex flex-col">
                     <label for="password" class="text-sm">Password</label>
-                    <input type="password" name="password" id="password" class="rounded-md w-52 h-8">
+                    <input type="password" name="password" id="password" class="rounded-md w-52 h-8 bg-white/80">
                     @if ($errors->first('password'))
                     <p class="text-sm text-red-600">{{$errors->first('password')}}</p>
                     @endif

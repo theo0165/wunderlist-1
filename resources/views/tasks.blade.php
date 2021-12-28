@@ -14,7 +14,7 @@
             <div class="w-1/3 h-full"><a href="{{url('profile')}}"><img src="images/home-icon.svg" alt="" class="h-full">
                 </a></div>
             <div class="w-1/3 h-full">
-                <a href=""><img src="images/list-icon.svg" alt="" class="h-full m-auto">
+                <a href="/lists"><img src="images/list-icon.svg" alt="" class="h-full m-auto">
                 </a>
             </div>
             <div class="w-1/3 h-full flex justify-end items-center">
