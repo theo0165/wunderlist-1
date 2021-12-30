@@ -78,26 +78,22 @@ class TaskController extends Controller
         $tasks = Task::where('user_id', auth()->id())->get()->toArray();
         $lists = TaskList::where('user_id', auth()->id())->get()->toArray();
 
-        for ($i = 0; $i < count($tasks); $i++) {
-            foreach ($lists as $list) {
-                $tasks[$i]['list_title'] = "";
-                if ($tasks[$i]['list_id'] === $list['id']) {
-                    $tasks[$i]['list_title'] = " -> $list[title]";
-                    break;
-                }
-            }
-        }
-
-
+        $tasks = addListTitle($tasks, $lists);
         $tasks = sortTaskeByDateTime($tasks);
+
         return view("tasks", ['tasks' => $tasks]);
     }
 
     public function loadTasksInList(Request $request)
     {
         $tasks = Task::where('user_id', auth()->id())->where('list_id', $request->input('list_id'))->get()->toArray();
+        $list = TaskList::where('user_id', auth()->id())->where('id', $request->input('list_id'))->first()->toArray();
+
+
+
         $tasks = sortTaskeByDateTime($tasks);
-        return view("list", ['tasks' => $tasks]);
+
+        return view("list", ['tasks' => $tasks, 'list' => $list]);
     }
 
     public function loadToday()
@@ -117,6 +113,20 @@ class TaskController extends Controller
         $tasks = sortTaskeByDateTime($tasks);
         return view(request()->path(), ['tasks' => $tasks]);
     }
+}
+
+function addListTitle($tasks, $lists)
+{
+    for ($i = 0; $i < count($tasks); $i++) {
+        foreach ($lists as $list) {
+            $tasks[$i]['list_title'] = "";
+            if ($tasks[$i]['list_id'] === $list['id']) {
+                $tasks[$i]['list_title'] = "$list[title]";
+                break;
+            }
+        }
+    }
+    return $tasks;
 }
 
 function sortTaskeByDateTime($tasks)

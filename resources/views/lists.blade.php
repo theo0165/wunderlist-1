@@ -53,6 +53,8 @@
         @include('includes.listcard')
         @endforeach
 
+        <script src="js/animateforms.js"></script>
+
 
     </main>
 

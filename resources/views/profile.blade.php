@@ -42,7 +42,7 @@
             @endif
         </main>
 
-        <script src="js/animatecards.js"></script>
+        <script src="js/animateforms.js"></script>
 
         <script>
             const hamburger = document.getElementById("hamburger");

@@ -13,7 +13,7 @@
         <div class="w-72 bg-white/25 rounded-xl flex flex-col justify-center items-center shadow-lg shadow-rose-400/10">
             <h2 class="font-raleway-light text-2xl mt-6">Task</h2>
 
-            <form method="post" id="taskform" class="w-full px-6 flex flex-col justify-center items-center">
+            <form method="post" id="taskform" class="w-full px-6 flex flex-col justify-center items-center opacity-0">
                 {{csrf_field()}}
                 <div class="flex flex-col mb-4">
                     <label for="title" class="text-sm">Title</label>
@@ -41,6 +41,8 @@
             <a href="{{url()->previous()}}" class="mb-6 text-sm text-mainblue-600">Cancel</a>
         </div>
     </main>
+
+    <script src="js/animateforms.js"></script>
 
 </body>
 
