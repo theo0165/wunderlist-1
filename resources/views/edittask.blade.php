@@ -10,14 +10,14 @@
 
     <main class="w-full h-full flex flex-col justify-center items-center">
 
-        <div class="w-72 bg-white/25 rounded-xl flex flex-col justify-center items-center relative  shadow-lg">
+        <div class="w-72 bg-white/25 rounded-xl flex flex-col justify-center items-center relative  shadow-lg shadow-rose-400/10">
 
             <form method="post" id="deletetaskform" class="absolute top-2 right-2">
                 {{csrf_field()}}
-                <button type="submit"><img src="images/trash-icon.svg" alt="" class=" w-8 h-8"></button>
                 <input type="hidden" name="id" value="{{$task['id']}}">
                 <input type="hidden" name="request" value="delete">
-                <input type="hidden" name="back_url" value="{{$task['back_url']}}">
+                <input type="hidden" name="back_route" value="{{$task['back_route']}}">
+                <button type="submit"><img src="images/trash-icon.svg" alt="" class=" w-8 h-8"></button>
             </form>
 
             <h2 class="font-raleway-light text-2xl mt-6">Task</h2>
@@ -39,7 +39,13 @@
                 <div class="flex flex-col mb-4">
                     <label for="listid" class="text-sm">Add to list</label>
                     <select name="listid" id="listid" class="rounded-md w-52 h-8  bg-white/80">
-                        <option value=""></option>
+
+                        @if(isset($task['list_title']))
+                        <option value="{{$task['list_id']}}">{{$task['list_title']}}</option>
+                        @else
+                        <option value="">---</option>
+                        @endif
+
                         @foreach($lists as $list)
                         <option value="{{$list['id']}}">{{$list['title']}}</option>
                         @endforeach
@@ -59,13 +65,13 @@
 
                 <input type="hidden" name="id" value="{{$task['id']}}">
                 <input type="hidden" name="request" value="update">
-                <input type="hidden" name="back_url" value="{{$task['back_url']}}">
+                <input type="hidden" name="back_route" value="{{$task['back_route']}}">
 
 
                 <button type="submit" class="bg-mainblue-600 my-6 w-36 h-12 text-sm text-white rounded-md">Done</button>
             </form>
 
-            <a href="{{$task['back_url']}}" class="mb-6 text-sm text-mainblue-600">Cancel</a>
+            <a href="{{$task['back_route']}}" class="mb-6 text-sm text-mainblue-600">Cancel</a>
         </div>
     </main>
 

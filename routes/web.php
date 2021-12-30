@@ -42,7 +42,7 @@ Route::post('/edittask', [TaskController::class, 'request']);
 Route::view('/createtask', 'createtask');
 Route::post('/createtask', [TaskController::class, 'request']);
 
-Route::post('/list', [TaskController::class, 'loadTasksInList'])->name('list');
+Route::get('/list', [TaskController::class, 'loadTasksInList'])->name('list');
 
 Route::get('/lists', [TaskListController::class, 'loadLists'])->name('lists');
 Route::post('/lists', [TaskListController::class, 'createList']);

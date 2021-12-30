@@ -20,7 +20,7 @@
         <p class="mx-auto text-sm text-center">{{$success}}<br>Log in below to continue.</p>
         @endisset
 
-        <div class="w-72 mt-3 bg-white/25 rounded-xl flex flex-col justify-center items-center shadow-lg">
+        <div class="w-72 mt-3 bg-white/25 rounded-xl flex flex-col justify-center items-center shadow-lg shadow-rose-400/10">
             <h2 class="font-raleway-light text-2xl mt-6">Log in</h2>
 
             <form action="/profile" method="post" class="w-full h-60 pl-6 pr-6 flex flex-col justify-center items-center">

@@ -18,7 +18,13 @@ class TaskController extends Controller
         if ($request->has('task_id')) {
             $taskid = $request->input('task_id');
             $task = Task::where('user_id', auth()->id())->where('id', $taskid)->first()->toArray();
-            $task['back_url'] = $request['back_url'];
+            $task['back_route'] = $request['back_route'];
+
+            $currentList = TaskList::where('user_id', auth()->id())->where('id', $task['list_id'])->first();
+            if ($currentList) {
+                $currentList = $currentList->toArray();
+                $task['list_title'] = $currentList['title'];
+            }
 
             //Make a join with list table and find which list that belongs to to this task.
             //Add the name of it to task, just for display in the form. The list_id is already saved.
@@ -60,26 +66,36 @@ class TaskController extends Controller
                         'list_id' => $request->input('listid'),
                         'completed' => $isCompleted
                     ]);
-                return redirect()->to($request->input('back_url'));
+                return redirect()->route($request->input('back_route'), ['list_id' => $request->input('listid')]);
             case 'delete': //This is when pushing delete on 'edittask'-page.
                 Task::where('id', $request->input('id'))->delete();
-                return redirect()->to($request->input('back_url'));
+                return redirect()->route($request->input('back_route'));
         }
     }
 
     public function loadTasksInTasks()
     {
         $tasks = Task::where('user_id', auth()->id())->get()->toArray();
+        $lists = TaskList::where('user_id', auth()->id())->get()->toArray();
+
+        for ($i = 0; $i < count($tasks); $i++) {
+            foreach ($lists as $list) {
+                $tasks[$i]['list_title'] = "";
+                if ($tasks[$i]['list_id'] === $list['id']) {
+                    $tasks[$i]['list_title'] = " -> $list[title]";
+                    break;
+                }
+            }
+        }
+
+
         $tasks = sortTaskeByDateTime($tasks);
         return view("tasks", ['tasks' => $tasks]);
     }
 
-    public function loadTasksInList()
+    public function loadTasksInList(Request $request)
     {
-        $tasks = DB::table('tasks')
-            ->where('tasks.user_id', auth()->id())
-            ->join('task_lists', 'tasks.list_id', '=', 'task_lists.id')
-            ->get()->toArray();
+        $tasks = Task::where('user_id', auth()->id())->where('list_id', $request->input('list_id'))->get()->toArray();
         $tasks = sortTaskeByDateTime($tasks);
         return view("list", ['tasks' => $tasks]);
     }
