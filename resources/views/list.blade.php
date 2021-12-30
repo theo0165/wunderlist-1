@@ -36,7 +36,6 @@
         <p class="text-gray-600 text-center text-sm mt-20">There are no tasks.<br>Click above to add a new one.</p>
         @else
         <p class="ml-3 mb-2 ">Tasks</p>
-
         @foreach($tasks as $task)
         @include('includes.taskcard')
         @endforeach

@@ -10,7 +10,7 @@
 
     <main class="w-full h-full flex flex-col justify-center items-center">
 
-        <div class="w-72 bg-white/25 rounded-xl flex flex-col justify-center items-center shadow-lg">
+        <div class="w-72 bg-white/25 rounded-xl flex flex-col justify-center items-center shadow-lg shadow-rose-400/10">
             <h2 class="font-raleway-light text-2xl mt-6">Task</h2>
 
             <form method="post" id="taskform" class="w-full px-6 flex flex-col justify-center items-center">
