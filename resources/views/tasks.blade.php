@@ -43,7 +43,7 @@
 
     </main>
 
-    <script src="js/animatecards.js"></script>
+    <script src="js/animateforms.js"></script>
 
 </body>
 

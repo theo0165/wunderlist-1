@@ -3,11 +3,10 @@
 
 <head>
     @include('includes.head')
-    <title>Listig | Tasks</title>
+    <title>Listig | {{$list['title']}}</title>
 </head>
 
 <body class="m-0 bg-gradient-to-t from-purple-400 to-sky-200 bg-no-repeat bg-fixed box-border">
-
     <main class="max-w-sm m-auto">
 
         <nav class="w-full h-12 flex p-2">
@@ -25,7 +24,7 @@
         <form action="/createtask" method="get">
             <input type="hidden" name="list" value="some">
             <button type="submit" class="w-full flex flex-col items-center mt-12 mb-8">
-                <p>All tasks</p>
+                <p class="font-raleway-light text-2xl">{{$list['title']}}</p>
                 <img src="images/add-icon.svg" alt="" class="w-12 h-12 m-4 mb-1">
                 <p class="text-sm">New task</p>
             </button>
@@ -44,7 +43,7 @@
 
     </main>
 
-    <script src="js/animatecards.js"></script>
+    <script src="js/animateforms.js"></script>
 
 </body>
 

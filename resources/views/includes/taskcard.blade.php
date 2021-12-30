@@ -14,7 +14,17 @@
                 @endif
                 <div class="w-full h-full flex">
                     <div class="w-4/6 h-full px-1 flex flex-col items-start">
-                        <p class="font-semibold text-left">{{$task['title']}}<span class="text-sm">{{$task['list_title']}}</span></p>
+                        <div class="flex items-center">
+                            <p class="font-semibold text-left">{{$task['title']}}</p>
+                            @if(isset($task['list_title']))
+                            @if($task['list_title'] !== "")
+                            <p>&nbsp&nbsp</p>
+                            <div class="text-sm bg-purple-200 p-1 rounded-md">
+                                <p class="font-semibold text-gray-800">{{$task['list_title']}}</p>
+                            </div>
+                            @endif
+                            @endif
+                        </div>
                         <p class="text-sm text-left">{{$task['description']}}</p>
                     </div>
                     <div class="w-2/6 h-full px-1 flex flex-col items-end">

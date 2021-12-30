@@ -22,7 +22,7 @@
 
             <h2 class="font-raleway-light text-2xl mt-6">Task</h2>
 
-            <form action="" method="post" id="taskform" class="w-full px-6 flex flex-col justify-center items-center">
+            <form action="" method="post" id="taskform" class="w-full px-6 flex flex-col justify-center items-center opacity-0">
                 {{csrf_field()}}
                 <div class="flex flex-col mb-4">
                     <label for="title" class="text-sm">Title</label>
@@ -75,6 +75,7 @@
         </div>
     </main>
 
+    <script src="js/animateforms.js"></script>
 </body>
 
 </html>
