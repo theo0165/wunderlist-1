@@ -14,6 +14,7 @@
 
             <form method="post" id="deletetaskform" class="absolute top-2 right-2">
                 {{csrf_field()}}
+                @method('delete')
                 <input type="hidden" name="id" value="{{$task['id']}}">
                 <input type="hidden" name="request" value="delete">
                 <input type="hidden" name="back_route" value="{{$task['back_route']}}">
@@ -24,6 +25,7 @@
 
             <form action="" method="post" id="taskform" class="w-full px-6 flex flex-col justify-center items-center opacity-0">
                 {{csrf_field()}}
+                @method('put')
                 <div class="flex flex-col mb-4">
                     <label for="title" class="text-sm">Title</label>
                     <input type="text" name="title" id="title" value="{{$task['title']}}" class="rounded-md w-52 h-8 bg-white/80">

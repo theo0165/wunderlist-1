@@ -1,6 +1,6 @@
 <!-- Task card -->
 
-<form action="/edittask" method="post" class="mb-0.5 opacity-0 rounded-md hover:bg-white/20">
+<form action="/edittask" method="get" class="mb-0.5 opacity-0 rounded-md hover:bg-white/20">
     {{csrf_field()}}
     <button class="w-full max-w-sm m-auto block">
         <input type="hidden" name="task_id" value="{{$task['id']}}">

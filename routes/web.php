@@ -19,30 +19,32 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+//Login
+Route::view('/', 'login');
 
-Route::get(
-    '/',
-    function () {
-        return view('login');
-    }
-);
-
-
-
+//Signup
 Route::get('/signup', [RegisterUserController::class, 'create']);
 Route::post('/', [RegisterUserController::class, 'store']);
 
+//Profile
 Route::get('/profile', [TaskController::class, 'loadToday']);
 Route::post('/profile', LogInUserController::class);
 
+//Tasks
 Route::get('/tasks', [TaskController::class, 'loadTasksInTasks'])->name('tasks');
 
-Route::post('/edittask', [TaskController::class, 'request']);
+//Edit task
+Route::get('/edittask', [TaskController::class, 'load']);
+Route::put('/edittask', [TaskController::class, 'update']);
+Route::delete('edittask', [TaskController::class, 'delete']);
 
+//Create task
 Route::view('/createtask', 'createtask');
-Route::post('/createtask', [TaskController::class, 'request']);
+Route::post('/createtask', [TaskController::class, 'store']);
 
+//List
 Route::get('/list', [TaskController::class, 'loadTasksInList'])->name('list');
 
-Route::get('/lists', [TaskListController::class, 'loadLists'])->name('lists');
-Route::post('/lists', [TaskListController::class, 'createList']);
+//Lists
+Route::get('/lists', [TaskListController::class, 'load'])->name('lists');
+Route::post('/lists', [TaskListController::class, 'create']);
