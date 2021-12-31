@@ -12,9 +12,53 @@ use DateTime;
 
 class TaskController extends Controller
 {
-    public function request(Request $request)
+    public function store(Request $request)
     {
-        //This is when entering 'edittask'-page.
+        if ($request->input('request') === 'createfromlist') {
+            dd("Yo!");
+        }
+
+        $task = new Task;
+        $task->user_id = auth()->id();
+        $task->title = $request->input('title');
+        $task->description = $request->input('description');
+        $task->deadline = $request->input('deadline');
+        $task->list_id = $request->input('listid');
+        if ($request->has('completed')) {
+            $task->completed = true;
+        } else {
+            $task->completed = false;
+        }
+        $task->save();
+        return redirect()->route("tasks");
+    }
+
+    public function update(Request $request)
+    {
+        $isCompleted = false;
+        if ($request->has('completed')) {
+            $isCompleted = true;
+        }
+        Task::where('id', $request->input('id')) //Is this safe, could you change the id in the browser and change other's tasks?
+            ->update([
+                'title' => $request->input('title'),
+                'description' => $request->input('description'),
+                'deadline' => $request->input('deadline'),
+                'list_id' => $request->input('listid'),
+                'completed' => $isCompleted
+            ]);
+        return redirect()->route($request->input('back_route'), ['list_id' => $request->input('listid')]);
+    }
+
+    public function delete(Request $request)
+    {
+        Task::where('id', $request->input('id'))->delete();
+        return redirect()->route($request->input('back_route'));
+    }
+
+    //This is when entering 'edittask'-page.
+    public function load(Request $request)
+    {
         if ($request->has('task_id')) {
             $taskid = $request->input('task_id');
             $task = Task::where('user_id', auth()->id())->where('id', $taskid)->first()->toArray();
@@ -26,50 +70,9 @@ class TaskController extends Controller
                 $task['list_title'] = $currentList['title'];
             }
 
-            //Make a join with list table and find which list that belongs to to this task.
-            //Add the name of it to task, just for display in the form. The list_id is already saved.
-
             $lists = TaskList::all()->toArray();
 
             return view("edittask", ['task' => $task, 'lists' => $lists]);
-        }
-
-        if ($request->input('request') === 'createfromlist') {
-            dd("Yo!");
-        }
-
-        switch ($request->input('request')) {
-            case 'store': //This is when pushing 'done' on 'createtask'-page
-                $task = new Task;
-                $task->user_id = auth()->id();
-                $task->title = $request->input('title');
-                $task->description = $request->input('description');
-                $task->deadline = $request->input('deadline');
-                $task->list_id = $request->input('listid');
-                if ($request->has('completed')) {
-                    $task->completed = true;
-                } else {
-                    $task->completed = false;
-                }
-                $task->save();
-                return redirect()->route("tasks");
-            case 'update': //This is when pushing 'done' on 'edittask'-page
-                $isCompleted = false;
-                if ($request->has('completed')) {
-                    $isCompleted = true;
-                }
-                Task::where('id', $request->input('id')) //Is this safe, could you change the id in the browser and change other's tasks?
-                    ->update([
-                        'title' => $request->input('title'),
-                        'description' => $request->input('description'),
-                        'deadline' => $request->input('deadline'),
-                        'list_id' => $request->input('listid'),
-                        'completed' => $isCompleted
-                    ]);
-                return redirect()->route($request->input('back_route'), ['list_id' => $request->input('listid')]);
-            case 'delete': //This is when pushing delete on 'edittask'-page.
-                Task::where('id', $request->input('id'))->delete();
-                return redirect()->route($request->input('back_route'));
         }
     }
 
