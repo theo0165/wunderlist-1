@@ -42,9 +42,9 @@ class RegisterUserController extends Controller
 
         //If user doesn't exist, create new user and save to db.
         $user = new User;
-        $user->name = '';
         $user->email = $email;
         $user->password = Hash::make($password);
+        $user->avatar_img = '';
         $user->save();
 
         return view('login')->with(['success' => 'Success!']);
