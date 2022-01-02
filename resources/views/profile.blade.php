@@ -24,9 +24,14 @@
                     <a href="" class="flex gap-1"><img src="images/gear-icon.svg" alt="" class="w-6 h-6">
                         <p class="text-white">Settings</p>
                     </a>
-                    <a href="" class="flex gap-1"><img src="images/logout-icon.svg" alt="" class="w-6 h-6">
-                        <p class="text-white">Log out</p>
-                    </a>
+                    <form action="/profile" method="post">
+                        {{csrf_field()}}
+                        <button href="" class="flex gap-1"><img src="images/logout-icon.svg" alt="" class="w-6 h-6">
+                            <p class="text-white">Log out</p>
+                        </button>
+
+                    </form>
+
                 </div>
             </div>
         </nav>

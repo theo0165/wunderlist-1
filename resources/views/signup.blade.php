@@ -17,7 +17,7 @@
         <div class="w-72 bg-white/25 mt-3 rounded-xl flex flex-col justify-center items-center shadow-lg shadow-rose-400/10">
             <h2 class="font-raleway-light text-2xl mt-6">Sign up</h2>
 
-            <form action="/" method="post" class="w-full h-60 pl-6 pr-6 flex flex-col justify-center items-center">
+            <form action="/signup" method="post" class="w-full h-60 pl-6 pr-6 flex flex-col justify-center items-center">
                 {{csrf_field()}}
                 <div class="flex flex-col mb-4">
                     <label for="email" class="text-sm">Email</label>
