@@ -7,9 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 
-class LogInUserController extends Controller
+class AuthUserController extends Controller
 {
-    function __invoke(Request $request)
+
+    function login(Request $request)
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
@@ -25,5 +26,16 @@ class LogInUserController extends Controller
         return back()->withErrors([
             'email' => 'Oops, something went wrong. Please try again.',
         ]);
+    }
+
+    function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
 }
