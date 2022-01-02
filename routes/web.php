@@ -29,7 +29,7 @@ Route::post('/signup', [RegisterUserController::class, 'store']);
 
 Route::group(['middleware' => ['auth']], function () {
     //Profile
-    Route::get('/profile', [TaskController::class, 'loadToday']);
+    Route::get('/profile', [TaskController::class, 'loadToday'])->name('profile');
     Route::post('/profile', [AuthUserController::class, 'logout']);
 
     //Tasks
@@ -50,4 +50,7 @@ Route::group(['middleware' => ['auth']], function () {
     //Lists
     Route::get('/lists', [TaskListController::class, 'load'])->name('lists');
     Route::post('/lists', [TaskListController::class, 'create']);
+
+    //Settings
+    Route::view('/settings', 'settings');
 });

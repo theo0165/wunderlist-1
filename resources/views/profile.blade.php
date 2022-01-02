@@ -21,12 +21,12 @@
             </div>
             <div class="w-full m-auto right-0 h-screen bg-mainblue-600 absolute z-2 flex justify-center items-center" id="hamburger-panel">
                 <div class="flex flex-col gap-6">
-                    <a href="" class="flex gap-1"><img src="images/gear-icon.svg" alt="" class="w-6 h-6">
+                    <a href="{{url('settings')}}" class="flex gap-1"><img src="images/gear-icon.svg" alt="" class="w-6 h-6">
                         <p class="text-white">Settings</p>
                     </a>
                     <form action="/profile" method="post">
                         {{csrf_field()}}
-                        <button href="" class="flex gap-1"><img src="images/logout-icon.svg" alt="" class="w-6 h-6">
+                        <button class="flex gap-1"><img src="images/logout-icon.svg" alt="" class="w-6 h-6">
                             <p class="text-white">Log out</p>
                         </button>
 
