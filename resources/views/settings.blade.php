@@ -20,7 +20,9 @@
 
     <main class="w-full h-[calc(100vh-3rem)] flex flex-col justify-center items-center gap-12">
 
-        <form action="/settings" method="post">
+        <form action="/settings" method="post" id="upload-avatar-form" enctype="multipart/form-data">
+            {{csrf_field()}}
+            @method('patch')
             <label for="avatar-img" class="text-white flex flex-col items-center gap-2"><img src="images/add-icon-white.svg" alt="" class="w-12 h-12">
                 <p>Upload avatar image</p>
             </label>
@@ -40,7 +42,12 @@
         </form>
     </main>
 
-
+    <script>
+        const uploadAvatarForm = document.getElementById('upload-avatar-form');
+        uploadAvatarForm.addEventListener('change', () => {
+            uploadAvatarForm.submit();
+        });
+    </script>
 
 </body>
 
