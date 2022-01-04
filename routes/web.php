@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\AuthUserController;
+use App\Http\Controllers\EditUserController;
 use App\Http\Controllers\RegisterUserController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TaskListController;
-use App\Models\TaskList;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,4 +53,5 @@ Route::group(['middleware' => ['auth']], function () {
 
     //Settings
     Route::view('/settings', 'settings');
+    Route::patch('/settings', [EditUserController::class, 'uploadAvatarImage']);
 });
