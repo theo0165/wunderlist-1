@@ -33,7 +33,6 @@
                         <option value="">---</option>
                     </select>
                 </div>
-                <input type="hidden" name="request" value="store">
 
                 <button type="submit" class="bg-mainblue-600 my-6 w-36 h-12 text-sm text-white rounded-md">Done</button>
             </form>

@@ -16,7 +16,6 @@
                 {{csrf_field()}}
                 @method('delete')
                 <input type="hidden" name="id" value="{{$task['id']}}">
-                <input type="hidden" name="request" value="delete">
                 <input type="hidden" name="back_route" value="{{$task['back_route']}}">
                 <button type="submit"><img src="images/trash-icon.svg" alt="" class=" w-8 h-8"></button>
             </form>

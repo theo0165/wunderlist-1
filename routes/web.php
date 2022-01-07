@@ -38,7 +38,7 @@ Route::group(['middleware' => ['auth']], function () {
     //Edit task
     Route::get('/edittask', [TaskController::class, 'load']);
     Route::put('/edittask', [TaskController::class, 'update']);
-    Route::delete('edittask', [TaskController::class, 'delete']);
+    Route::delete('/edittask', [TaskController::class, 'delete']);
 
     //Create task
     Route::view('/createtask', 'createtask');
@@ -46,6 +46,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     //List
     Route::get('/list', [TaskController::class, 'loadTasksInList'])->name('list');
+    Route::delete('/list', [TaskListController::class, 'delete']);
 
     //Lists
     Route::get('/lists', [TaskListController::class, 'load'])->name('lists');
