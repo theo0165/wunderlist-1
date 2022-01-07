@@ -69,11 +69,15 @@
                 <input type="hidden" name="request" value="update">
                 <input type="hidden" name="back_route" value="{{$task['back_route']}}">
 
-
                 <button type="submit" class="bg-mainblue-600 my-6 w-36 h-12 text-sm text-white rounded-md">Done</button>
             </form>
 
-            <a href="{{$task['back_route']}}" class="mb-6 text-sm text-mainblue-600">Cancel</a>
+            <?php $returnList = ""; ?>
+            @if($task['back_route'] === 'list')
+            <?php $returnList = '?list_id=' . $task['list_id']; ?>
+            @endif
+
+            <a href="{{url($task['back_route']).$returnList}}" class="mb-6 text-sm text-mainblue-600">Cancel</a>
         </div>
     </main>
 

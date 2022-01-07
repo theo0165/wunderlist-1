@@ -42,9 +42,7 @@
                 @if(auth()->user()['avatar_img'] === "")
                 <div class="w-24 h-24 bg-gray-400 rounded-full"></div>
                 @else
-                <?php $imageName = auth()->user()['avatar_img'] ?>
                 <img src="<?= asset('storage/images/' . auth()->user()['avatar_img']) ?>" class="w-24 h-24 rounded-full"></img>
-
                 @endif
                 <a href="{{url('tasks')}}" class="bg-transparent mb-6 mt-6 w-36 h-12 text-sm text-mainblue-600 rounded-md border-2 border-mainblue-600 text-center leading-[2.75rem]">Tasks</a>
                 <a href="{{url('lists')}}" class="bg-transparent mb-6 w-36 h-12 text-sm text-mainblue-600 rounded-md border-2 border-mainblue-600 text-center leading-[2.75rem]">Lists</a>
