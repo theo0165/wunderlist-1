@@ -8,7 +8,7 @@
 
 <body class="m-0 bg-gradient-to-t from-purple-400 to-sky-200 bg-no-repeat bg-fixed box-border">
 
-    <div class="w-72 h-64 bg-gradient-to-t from-purple-200 to-sky-100 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 top-72 rounded-md absolute flex flex-col items-center z-50 shadow-lg shadow-rose-400/10" id="create-panel">
+    <div class="w-72 h-64 bg-gradient-to-t from-purple-200 to-sky-100 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 top-72 rounded-md absolute flex flex-col items-center z-50 shadow-lg shadow-rose-400/10 hidden" id="create-panel">
         <h2 class="font-raleway-light text-2xl mt-6">Create list</h2>
         <form action="/lists" method="post" class="w-full h-60 pl-6 pr-6 flex flex-col justify-center items-center">
             {{csrf_field()}}

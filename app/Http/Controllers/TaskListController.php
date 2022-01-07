@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\TaskList;
+use App\Models\Task;
 use Illuminate\Http\Request;
 
 class TaskListController extends Controller
@@ -22,5 +23,13 @@ class TaskListController extends Controller
         $list->title = $request->input('title');
         $list->save();
         return redirect()->route("lists");
+    }
+
+    public function delete(Request $request)
+    {
+        Task::where('list_id', $request->input('list_id'))->delete();
+        TaskList::where('id', $request->input('list_id'))->delete();
+
+        return redirect()->route('lists');
     }
 }

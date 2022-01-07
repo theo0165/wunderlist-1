@@ -13,11 +13,18 @@
             <div class="w-1/3 h-full"><a href="{{url('profile')}}"><img src="images/home-icon.svg" alt="" class="h-full">
                 </a></div>
             <div class="w-1/3 h-full">
-                <a href=""><img src="images/list-icon.svg" alt="" class="h-full m-auto">
+                <a href="{{url('lists')}}"><img src="images/list-icon.svg" alt="" class="h-full m-auto">
                 </a>
             </div>
             <div class="w-1/3 h-full flex justify-end items-center">
-
+                <form method="post" id="deletetaskform" class="top-2 right-2">
+                    {{csrf_field()}}
+                    @method('delete')
+                    <!-- Since list_id-key is already in url, it can be fetched in request in controller. -->
+                    <!-- So no need to post list_id here in post request. -->
+                    <!-- Just make sure you are authorized to delete (Logged in user). -->
+                    <button type="submit"><img src="images/trash-icon.svg" alt="" class=" w-8 h-8"></button>
+                </form>
             </div>
         </nav>
 
