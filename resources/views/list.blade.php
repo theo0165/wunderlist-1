@@ -29,7 +29,8 @@
         </nav>
 
         <form action="/createtask" method="get">
-            <input type="hidden" name="list" value="some">
+            <input type="hidden" name="list" value="{{$list['id']}}">
+            <input type="hidden" name="back_route" value="{{basename($_SERVER['PHP_SELF']);}}">
             <button type="submit" class="w-full flex flex-col items-center mt-12 mb-8">
                 <p class="font-raleway-light text-2xl">{{$list['title']}}</p>
                 <img src="images/add-icon.svg" alt="" class="w-12 h-12 m-4 mb-1">

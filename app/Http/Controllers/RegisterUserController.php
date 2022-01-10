@@ -20,20 +20,17 @@ class RegisterUserController extends Controller
     {
         //Validation rules
         $rules = [
-            'email' => 'required', //|email?
-            'password' => 'required',
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'password' => ['required', 'string', 'confirmed', 'min:6', 'max:255']
         ];
         $customMessages = [
             'required' => 'The :attribute field is required'
         ];
         //Validate, throws errors and returns if fails.
-        $validation = $this->validate($request, $rules, $customMessages);
-
-        $email = $validation['email'];
-        $password = $validation['password'];
+        $inputData = $this->validate($request, $rules, $customMessages);
 
         //Check if there is a user in the db with that email already.
-        $user = User::where('email', $email)->first();
+        $user = User::where('email', $inputData['email'])->first();
         if ($user !== null) {
             //If user already exist, throw error and return.
             //This loads the view, but the url is wrong, because the form is posting to start page.. Fix somehow.
@@ -42,8 +39,8 @@ class RegisterUserController extends Controller
 
         //If user doesn't exist, create new user and save to db.
         $user = new User;
-        $user->email = $email;
-        $user->password = Hash::make($password);
+        $user->email = $inputData['email'];
+        $user->password = Hash::make($inputData['password']);
         $user->avatar_img = '';
         $user->save();
 

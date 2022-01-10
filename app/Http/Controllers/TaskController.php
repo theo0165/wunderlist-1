@@ -12,12 +12,31 @@ use DateTime;
 
 class TaskController extends Controller
 {
-    public function store(Request $request)
+
+    //This is when entering 'createtask'-page.
+    public function create(Request $request)
     {
-        if ($request->input('request') === 'createfromlist') {
-            dd("Yo!");
+        $lists = TaskList::all()->toArray();
+
+        $list = null; //This is the current list (When created from within a list, if not, value is null)
+        $listId = $request->input('list');
+        if ($listId !== null) {
+            foreach ($lists as $l) {
+                if ($listId = $l['id']) {
+                    $list['id'] = $l['id'];
+                    $list['title'] = $l['title'];
+                }
+            }
         }
 
+        if ($list !== null) {
+            return view("createtask", ['list' => $list, 'lists' => $lists]);
+        }
+        return view("createtask", ['lists' => $lists]);
+    }
+
+    public function store(Request $request)
+    {
         $task = new Task;
         $task->user_id = auth()->id();
         $task->title = $request->input('title');
@@ -30,7 +49,7 @@ class TaskController extends Controller
             $task->completed = false;
         }
         $task->save();
-        return redirect()->route("tasks");
+        return redirect()->route($request->input('back_route'), ['list_id' => $request->input('listid')]);
     }
 
     public function update(Request $request)
@@ -81,8 +100,8 @@ class TaskController extends Controller
         $tasks = Task::where('user_id', auth()->id())->get()->toArray();
         $lists = TaskList::where('user_id', auth()->id())->get()->toArray();
 
-        $tasks = addListTitle($tasks, $lists);
-        $tasks = sortTaskeByDateTime($tasks);
+        $tasks = $this->addListTitle($tasks, $lists);
+        $tasks = $this->sortTaskeByDateTime($tasks);
 
         return view("tasks", ['tasks' => $tasks]);
     }
@@ -92,9 +111,7 @@ class TaskController extends Controller
         $tasks = Task::where('user_id', auth()->id())->where('list_id', $request->input('list_id'))->get()->toArray();
         $list = TaskList::where('user_id', auth()->id())->where('id', $request->input('list_id'))->first()->toArray();
 
-
-
-        $tasks = sortTaskeByDateTime($tasks);
+        $tasks = $this->sortTaskeByDateTime($tasks);
 
         return view("list", ['tasks' => $tasks, 'list' => $list]);
     }
@@ -113,37 +130,37 @@ class TaskController extends Controller
             return false;
         });
 
-        $tasks = sortTaskeByDateTime($tasks);
+        $tasks = $this->sortTaskeByDateTime($tasks);
         return view(request()->path(), ['tasks' => $tasks]);
     }
-}
 
-function addListTitle($tasks, $lists)
-{
-    for ($i = 0; $i < count($tasks); $i++) {
-        foreach ($lists as $list) {
-            $tasks[$i]['list_title'] = "";
-            if ($tasks[$i]['list_id'] === $list['id']) {
-                $tasks[$i]['list_title'] = "$list[title]";
-                break;
+    private function addListTitle($tasks, $lists)
+    {
+        for ($i = 0; $i < count($tasks); $i++) {
+            foreach ($lists as $list) {
+                $tasks[$i]['list_title'] = "";
+                if ($tasks[$i]['list_id'] === $list['id']) {
+                    $tasks[$i]['list_title'] = "$list[title]";
+                    break;
+                }
             }
         }
+        return $tasks;
     }
-    return $tasks;
-}
 
-function sortTaskeByDateTime($tasks)
-{
-    //https://stackoverflow.com/questions/8121241/sort-array-based-on-the-datetime-in-php
-    usort($tasks, function ($a, $b) {
-        $ad = new DateTime($a['deadline']);
-        $bd = new DateTime($b['deadline']);
+    private function sortTaskeByDateTime($tasks)
+    {
+        //https://stackoverflow.com/questions/8121241/sort-array-based-on-the-datetime-in-php
+        usort($tasks, function ($a, $b) {
+            $ad = new DateTime($a['deadline']);
+            $bd = new DateTime($b['deadline']);
 
-        if ($ad == $bd) {
-            return 0;
-        }
+            if ($ad == $bd) {
+                return 0;
+            }
 
-        return $ad < $bd ? -1 : 1;
-    });
-    return $tasks;
+            return $ad < $bd ? -1 : 1;
+        });
+        return $tasks;
+    }
 }

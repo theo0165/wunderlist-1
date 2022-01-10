@@ -24,7 +24,7 @@ class AuthUserController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'Oops, something went wrong. Please try again.',
+            'email' => 'Something went wrong. Please try again.',
         ]);
     }
 
@@ -37,5 +37,10 @@ class AuthUserController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    function changeLogin(Request $request)
+    {
+        dd($request->all());
     }
 }

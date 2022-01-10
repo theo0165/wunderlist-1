@@ -24,6 +24,7 @@
 
         <form action="/createtask" method="get">
             <input type="hidden" name="list" value="">
+            <input type="hidden" name="back_route" value="{{basename($_SERVER['PHP_SELF']);}}">
             <button type="submit" class="w-full flex flex-col items-center mt-12 mb-8">
                 <p>All tasks</p>
                 <img src="images/add-icon.svg" alt="" class="w-12 h-12 m-4 mb-1">

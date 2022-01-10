@@ -664,6 +664,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-border-opacity: 1;
   border-color: rgb(0 97 187 / var(--tw-border-opacity));
 }
+.border-white {
+  --tw-border-opacity: 1;
+  border-color: rgb(255 255 255 / var(--tw-border-opacity));
+}
 .bg-white\/25 {
   background-color: rgb(255 255 255 / 0.25);
 }
@@ -715,6 +719,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-gradient-from: #e9d5ff;
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(233 213 255 / 0));
 }
+.from-mainblue-600\/90 {
+  --tw-gradient-from: rgb(0 97 187 / 0.9);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(0 97 187 / 0));
+}
+.from-mainblue-600 {
+  --tw-gradient-from: #0061BB;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(0 97 187 / 0));
+}
 .to-rose-200 {
   --tw-gradient-to: #fecdd3;
 }
@@ -724,11 +736,21 @@ Ensure the default browser behavior of the `hidden` attribute.
 .to-sky-100 {
   --tw-gradient-to: #e0f2fe;
 }
+.to-sky-500\/90 {
+  --tw-gradient-to: rgb(14 165 233 / 0.9);
+}
+.to-sky-500 {
+  --tw-gradient-to: #0ea5e9;
+}
 .bg-fixed {
   background-attachment: fixed;
 }
 .bg-no-repeat {
   background-repeat: no-repeat;
+}
+.object-cover {
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .p-2 {
   padding: 0.5rem;
