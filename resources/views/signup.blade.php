@@ -17,7 +17,7 @@
         <div class="w-72 bg-white/25 mt-3 rounded-xl flex flex-col justify-center items-center shadow-lg shadow-rose-400/10">
             <h2 class="font-raleway-light text-2xl mt-6">Sign up</h2>
 
-            <form action="/signup" method="post" class="w-full h-60 pl-6 pr-6 flex flex-col justify-center items-center">
+            <form action="/signup" method="post" class="w-full pl-6 pr-6 flex flex-col justify-center items-center">
                 {{csrf_field()}}
                 <div class="flex flex-col mb-4">
                     <label for="email" class="text-sm">Email</label>
@@ -31,9 +31,13 @@
                 </div>
                 <div class="flex flex-col">
                     <label for="password" class="text-sm">Password</label>
-                    <input type="password" name="password" id="password" class="rounded-md w-52 h-8 bg-white/80">
+                    <input type="password" name="password" id="password" class="rounded-md mb-4 w-52 h-8 bg-white/80">
+
+                    <label for="password-confirm" class="text-sm">Confirm Password</label>
+                    <input type="password" name="password_confirmation" id="password-confirm" class="rounded-md w-52 h-8 bg-white/80">
+
                     @if ($errors->first('password'))
-                    <p class="text-sm text-red-600">{{$errors->first('password')}}</p>
+                    <p class="w-52 text-sm text-red-600">{{$errors->first('password')}}</p>
                     @endif
                 </div>
                 <button type="submit" class="bg-mainblue-600 my-6 w-36 h-12 text-sm text-white rounded-md">Sign up</button>

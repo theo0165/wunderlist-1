@@ -18,7 +18,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 //Login
 Route::view('/', 'login')->name('login');
 Route::post('/', [AuthUserController::class, 'login']);
@@ -41,7 +40,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::delete('/edittask', [TaskController::class, 'delete']);
 
     //Create task
-    Route::view('/createtask', 'createtask');
+    Route::get('/createtask', [TaskController::class, 'create']);
     Route::post('/createtask', [TaskController::class, 'store']);
 
     //List
@@ -55,4 +54,8 @@ Route::group(['middleware' => ['auth']], function () {
     //Settings
     Route::view('/settings', 'settings');
     Route::patch('/settings', [EditUserController::class, 'uploadAvatarImage']);
+
+    //Change login
+    Route::view('/changelogin', 'changelogin');
+    Route::patch('/changelogin', [EditUserController::class, 'changeLogin']);
 });

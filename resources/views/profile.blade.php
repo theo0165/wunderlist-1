@@ -19,7 +19,7 @@
                     <div class="w-full h-1/6 bg-mainblue-600 rounded-full"></div>
                 </div>
             </div>
-            <div class="w-full m-auto right-0 h-screen bg-mainblue-600 absolute z-2 flex justify-center items-center hidden" id="hamburger-panel">
+            <div class="w-full m-auto right-0 h-screen bg-gradient-to-t from-mainblue-600 to-sky-500 bg-no-repeat bg-fixed box-border absolute z-2 flex justify-center items-center hidden" id="hamburger-panel">
                 <div class="flex flex-col gap-6">
                     <a href="{{url('settings')}}" class="flex gap-1"><img src="images/gear-icon.svg" alt="" class="w-6 h-6">
                         <p class="text-white">Settings</p>
@@ -36,13 +36,12 @@
             </div>
         </nav>
 
-
         <main class="max-w-sm m-auto">
             <div class="w-full flex flex-col items-center mt-12">
                 @if(auth()->user()['avatar_img'] === "")
                 <div class="w-24 h-24 bg-gray-400 rounded-full"></div>
                 @else
-                <img src="<?= asset('storage/images/' . auth()->user()['avatar_img']) ?>" class="w-24 h-24 rounded-full"></img>
+                <img src="<?= asset('storage/images/' . auth()->user()['avatar_img']) ?>" class="w-24 h-24 rounded-full object-cover"></img>
                 @endif
                 <a href="{{url('tasks')}}" class="bg-transparent mb-6 mt-6 w-36 h-12 text-sm text-mainblue-600 rounded-md border-2 border-mainblue-600 text-center leading-[2.75rem]">Tasks</a>
                 <a href="{{url('lists')}}" class="bg-transparent mb-6 w-36 h-12 text-sm text-mainblue-600 rounded-md border-2 border-mainblue-600 text-center leading-[2.75rem]">Lists</a>

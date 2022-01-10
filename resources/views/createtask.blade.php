@@ -29,8 +29,19 @@
                 </div>
                 <div class="flex flex-col mb-4">
                     <label for="listid" class="text-sm">Add to list</label>
-                    <select name="listid" id="listid" class="rounded-md w-52 h-8 bg-white bg-white/80">
+                    <select name="listid" id="listid" class="rounded-md w-52 h-8  bg-white/80">
+
+
+
+                        @if(isset($list))
+                        <option value="{{$list['id']}}">{{$list['title']}}</option>
+                        @else
                         <option value="">---</option>
+                        @endif
+
+                        @foreach($lists as $l)
+                        <option value="{{$l['id']}}">{{$l['title']}}</option>
+                        @endforeach
                     </select>
                 </div>
 

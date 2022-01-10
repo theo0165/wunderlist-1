@@ -6,7 +6,7 @@
     <title>Listig | Settings</title>
 </head>
 
-<body class="m-0 bg-mainblue-600">
+<body class="m-0 bg-gradient-to-t from-mainblue-600 to-sky-500 bg-no-repeat bg-fixed box-border">
 
 
     <nav class="w-full h-12 flex relative">
@@ -28,6 +28,8 @@
             </label>
             <input type="file" name="avatar-img" id="avatar-img" class="hidden">
         </form>
+
+        <a href="{{url('changelogin')}}" class="bg-transparent mb-6 mt-6 w-36 h-12 text-sm text-white rounded-md border-2 border-white text-center leading-[2.75rem]">Change Login</a>
 
         <form action="/settings" method="post">
             {{csrf_field()}}

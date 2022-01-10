@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 
 class TaskListController extends Controller
 {
-
     public function load()
     {
         $lists = TaskList::where('user_id', auth()->id())->get()->toArray();
