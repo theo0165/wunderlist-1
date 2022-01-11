@@ -101,7 +101,7 @@ class TaskController extends Controller
         $lists = TaskList::where('user_id', auth()->id())->get()->toArray();
 
         $tasks = $this->addListTitle($tasks, $lists);
-        $tasks = $this->sortTaskeByDateTime($tasks);
+        $tasks = $this->sortTasksByDateTime($tasks);
 
         return view("tasks", ['tasks' => $tasks]);
     }
@@ -111,7 +111,7 @@ class TaskController extends Controller
         $tasks = Task::where('user_id', auth()->id())->where('list_id', $request->input('list_id'))->get()->toArray();
         $list = TaskList::where('user_id', auth()->id())->where('id', $request->input('list_id'))->first()->toArray();
 
-        $tasks = $this->sortTaskeByDateTime($tasks);
+        $tasks = $this->sortTasksByDateTime($tasks);
 
         return view("list", ['tasks' => $tasks, 'list' => $list]);
     }
@@ -130,7 +130,7 @@ class TaskController extends Controller
             return false;
         });
 
-        $tasks = $this->sortTaskeByDateTime($tasks);
+        $tasks = $this->sortTasksByDateTime($tasks);
         return view(request()->path(), ['tasks' => $tasks]);
     }
 
@@ -148,7 +148,7 @@ class TaskController extends Controller
         return $tasks;
     }
 
-    private function sortTaskeByDateTime($tasks)
+    private function sortTasksByDateTime($tasks)
     {
         //https://stackoverflow.com/questions/8121241/sort-array-based-on-the-datetime-in-php
         usort($tasks, function ($a, $b) {

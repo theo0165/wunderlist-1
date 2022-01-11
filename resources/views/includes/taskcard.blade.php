@@ -27,9 +27,9 @@
                         </div>
                         <p class="text-sm text-left">{{$task['description']}}</p>
                     </div>
-                    <div class="w-2/6 h-full px-1 flex flex-col items-end">
+                    <div class="w-2/6 h-full px-2 flex flex-col items-end">
                         <p class="font-semibold text-right">Due date</p>
-                        <p class="text-sm text-right">{{$task['deadline']}}</p>
+                        <p class="text-sm text-right">{{substr($task['deadline'], 0, -3)}}</p>
                     </div>
                 </div>
             </div>
